@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package user;
+
+//新版本需要的配置
+option go_package = "./user";
+
+message UserRequest {
+    int32 id = 1;
+}
+
+message UserResponse {
+    int32 id = 1;
+    string name = 2;
+}
+
+service UserService {
+    rpc getUser(UserRequest) returns (UserResponse) {};
+    rpc fuckUser(UserRequest) returns (UserResponse) {};
+}
+
+//protoc user.proto --go_out=./protobuf --go-grpc_out=./protobuf --go-grpc_opt=require_unimplemented_servers=false
